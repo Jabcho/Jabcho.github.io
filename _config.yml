@@ -171,11 +171,6 @@ collections:
     output: true
     sort_by: order
 
-  # API 문서 전용 컬렉션
-  apis:
-    output: true # 컬렉션 문서를 실제 페이지로 렌더링.
-    permalink: /apis/:path/ # 폴더 구조가 URL에 반영.
-
 defaults:
   - scope:
       path: "" # An empty string here means all files in the project
@@ -197,15 +192,6 @@ defaults:
     values:
       layout: page
       permalink: /:title/
-
-  # apis 컬렉션 문서 기본 레이아웃/옵션
-  - scope:
-      path: ""
-      type: apis
-    values:
-      layout: page
-      toc: true
-      comments: true
 
 sass:
   style: compressed
@@ -241,7 +227,3 @@ jekyll-archives:
 
 livereload: true
 watch: true
-
-# 탭에서 /apis/로 redirect_to: 를 쓰기 위한 플러그인
-plugins:
-  - jekyll-redirect-from
