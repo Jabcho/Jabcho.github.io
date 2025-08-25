@@ -22,3 +22,10 @@
 html[data-mode='dark'] {
   --sidebar-bg: rgb(44, 44, 44); /* 원하는 색상 */
 }
+
+/* --- custom overrides: sidebar subtitle only --- */
+#sidebar .site-subtitle,
+#sidebar .site-subtitle.fst-italic,
+#sidebar .fst-italic {
+  font-style: normal !important;
+}
