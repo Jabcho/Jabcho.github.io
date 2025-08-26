@@ -25,7 +25,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 30 # [추가] 비정상 장기 실행 방지
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
           bundler-cache: true
 
       - name: Build site
-        run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
+        run: bundle exec jekyll b --no-watch -d "_site${{ steps.pages.outputs.base_path }}" # --no-watch 추가 : 워크플로의 빌드 스텝에 --no-watch 를 강제로 붙이면, 설정에 뭐가 섞여 있어도 CI에서는 반드시 종료
         env:
           JEKYLL_ENV: "production"
 
