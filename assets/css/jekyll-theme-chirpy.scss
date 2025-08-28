@@ -29,3 +29,44 @@ html[data-mode='dark'] {
 #sidebar .fst-italic {
   font-style: normal !important;
 }
+
+/* === HOME 카드 스타일 (ADDED) === */
+.home-cards {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  margin: 32px 0;
+}
+.home-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  padding: 12px;
+}
+.home-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+}
+
+/* BLOG 하위처럼 보이는 들여쓰기 */
+#sidebar a[href='/categories/'],
+#sidebar a[href='/tags/'],
+#sidebar a[href='/archives/'],
+#sidebar a[href='/about/'] {
+  padding-left: 2.5rem !important; /* 들여쓰기 */
+  opacity: 0.78;
+}
+
+/* 아이콘도 살짝 우측으로*/
+#sidebar a[href='/categories/'] i,
+#sidebar a[href='/tags/'] i,
+#sidebar a[href='/archives/'] i,
+#sidebar a[href='/about/'] i {
+  margin-left: 0.5rem !important;
+}

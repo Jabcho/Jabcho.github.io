@@ -1,0 +1,104 @@
+---
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    {%- include head.html -%}
+    <style>
+      /* 기본 사이드바 숨김 */
+      #sidebar {
+        display: none;
+      }
+      /* 좌측 프로젝트 내비 */
+      .api-left {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 260px;
+        padding: 16px 12px 24px;
+        overflow: auto;
+        border-right: 1px solid #eee;
+        background: #fff;
+      }
+      .api-left .back a {
+        font-weight: 600;
+        display: inline-block;
+        margin: 6px 0 12px;
+      }
+      .api-left .topic {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 6px;
+      }
+      .api-left ul {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0;
+      }
+      .api-left li {
+        margin: 4px 0;
+      }
+      .api-left a[aria-current='page'] {
+        font-weight: 700;
+        text-decoration: underline;
+      }
+      /* 본문은 좌측 내비 폭만큼 오른쪽으로 */
+      main {
+        max-width: 980px;
+        margin-left: 300px;
+      }
+      @media (max-width: 992px) {
+        .api-left {
+          position: static;
+          width: auto;
+          height: auto;
+          border-right: none;
+        }
+        main {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {%- include topbar.html -%}
+
+    <aside class="api-left">
+      <div class="back"><a href="{{ '/api/' | relative_url }}">&laquo; Back to list</a></div>
+      <div class="topic">{{ page.topic }}</div>
+      <ul>
+        {%- assign sections = site.apis | where: 'topic', page.topic | sort: 'nav_order' -%}
+        {%- for s in sections -%}
+          <li>
+            <a
+              href="{{ s.url | relative_url }}"
+              {%- if s.url == page.url -%}
+                aria-current="page"
+              {%- endif -%}
+            >
+              {{ s.title }}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </aside>
+
+    <main>
+      <div class="page">
+        <article>
+          <header>
+            <h1>{{ page.title }}</h1>
+            {%- if page.source_url -%}
+              <p><a href="{{ page.source_url }}">공식 문서 원문</a></p>
+            {%- endif -%}
+          </header>
+
+          {{ content }}
+        </article>
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+  </body>
+</html>
