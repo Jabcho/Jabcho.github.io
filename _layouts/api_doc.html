@@ -1,104 +1,42 @@
 ---
+layout: default
 ---
-<!doctype html>
-<html lang="ko">
-  <head>
-    {%- include head.html -%}
-    <style>
-      /* 기본 사이드바 숨김 */
-      #sidebar {
-        display: none;
-      }
-      /* 좌측 프로젝트 내비 */
-      .api-left {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        width: 260px;
-        padding: 16px 12px 24px;
-        overflow: auto;
-        border-right: 1px solid #eee;
-        background: #fff;
-      }
-      .api-left .back a {
-        font-weight: 600;
-        display: inline-block;
-        margin: 6px 0 12px;
-      }
-      .api-left .topic {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin: 0 0 6px;
-      }
-      .api-left ul {
-        list-style: none;
-        padding: 0;
-        margin: 8px 0;
-      }
-      .api-left li {
-        margin: 4px 0;
-      }
-      .api-left a[aria-current='page'] {
-        font-weight: 700;
-        text-decoration: underline;
-      }
-      /* 본문은 좌측 내비 폭만큼 오른쪽으로 */
-      main {
-        max-width: 980px;
-        margin-left: 300px;
-      }
-      @media (max-width: 992px) {
-        .api-left {
-          position: static;
-          width: auto;
-          height: auto;
-          border-right: none;
-        }
-        main {
-          margin-left: 0;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    {%- include topbar.html -%}
+<div class="page">
+  <article>
+    <header>
+      <h1>{{ page.title }}</h1>
 
-    <aside class="api-left">
-      <div class="back"><a href="{{ '/api/' | relative_url }}">&laquo; Back to list</a></div>
-      <div class="topic">{{ page.topic }}</div>
-      <ul>
-        {%- assign sections = site.apis | where: 'topic', page.topic | sort: 'nav_order' -%}
-        {%- for s in sections -%}
-          <li>
-            <a
-              href="{{ s.url | relative_url }}"
-              {%- if s.url == page.url -%}
-                aria-current="page"
-              {%- endif -%}
-            >
-              {{ s.title }}
-            </a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    </aside>
+      {%- comment -%} 루트 문서(목차) 메타 계산 {%- endcomment -%}
+      {%- if page.project_id -%}
+        {%- assign root_doc = site.apis | where: 'project_id', page.project_id | where: 'is_contents', true | first -%}
+      {%- else -%}
+        {%- assign root_doc = site.apis | where: 'topic', page.topic | where: 'is_contents', true | first -%}
+      {%- endif -%}
 
-    <main>
-      <div class="page">
-        <article>
-          <header>
-            <h1>{{ page.title }}</h1>
-            {%- if page.source_url -%}
-              <p><a href="{{ page.source_url }}">공식 문서 원문</a></p>
-            {%- endif -%}
-          </header>
+      {%- assign meta_version = page.version | default: root_doc.version -%}
+      {%- assign meta_updated = page.last_updated | default: root_doc.last_updated -%}
+      {%- assign meta_source = page.source_url | default: root_doc.source_url -%}
 
-          {{ content }}
-        </article>
+      <div class="api-meta">
+        {%- if meta_version -%}
+          <span class="badge">Version: {{ meta_version }}</span>
+        {%- endif -%}
+        {%- if meta_updated -%}
+          <span class="badge">Updated: {{ meta_updated }}</span>
+        {%- endif -%}
+        {%- if meta_source -%}
+          <a class="badge" href="{{ meta_source }}" target="_blank" rel="noopener">공식 문서 원문</a>
+        {%- endif -%}
       </div>
-    </main>
+    </header>
 
-    {%- include footer.html -%}
-  </body>
-</html>
+    {{ content }}
+  </article>
+</div>
+
+<style>
+  #sidebar nav,
+  #sidebar .sidebar-bottom {
+    display: none !important;
+  }
+</style>

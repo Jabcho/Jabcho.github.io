@@ -40,7 +40,10 @@ refactor: true
       <article class="card-wrapper card">
         <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
           {%- assign has_image = post.image -%}
-          {%- assign card_body_col = has_image ? '7' : '12' -%}
+          {%- assign card_body_col = '12' -%}
+          {%- if has_image -%}
+            {%- assign card_body_col = '7' -%}
+          {%- endif -%}
 
           {%- if has_image -%}
             {%- assign src = post.image.path | default: post.image -%}
@@ -70,7 +73,10 @@ refactor: true
     <article class="card-wrapper card">
       <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
         {%- assign has_image = post.image -%}
-        {%- assign card_body_col = has_image ? '7' : '12' -%}
+        {%- assign card_body_col = '12' -%}
+        {%- if has_image -%}
+          {%- assign card_body_col = '7' -%}
+        {%- endif -%}
 
         {%- if has_image -%}
           {%- assign src = post.image.path | default: post.image -%}

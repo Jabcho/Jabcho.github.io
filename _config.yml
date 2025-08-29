@@ -145,6 +145,7 @@ collections:
   apis: # ← ADDED: API 문서 컬렉션
     output: true
     permalink: /api/:path/
+    sort_by: nav_order # ← ADDED: 사이드바 정렬 기준
 
 # === CHANGED: defaults에 apis 전용 값 추가 ===
 defaults:
@@ -172,6 +173,7 @@ defaults:
     values:
       layout: api_doc # _layouts/api_doc.html (6단계에서 생성)
       comments: true
+      toc: true
 
 sass:
   style: compressed

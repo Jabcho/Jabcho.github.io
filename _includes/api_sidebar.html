@@ -1,0 +1,93 @@
+{%- comment -%}
+  API 프로젝트 사이드바 (항상 Contents + 전체 항목)
+  - project_id / topic / slug 모두로 같은 프로젝트 문서를 수집
+  - 제목(프로젝트명)을 누르면 Contents로 이동
+  - 제목 아래에 'Contents' + 나머지 항목(01, 02 …) 들여쓰기 출력
+{%- endcomment -%}
+
+{%- assign topic_raw = page.topic -%}
+{%- assign base_key = page.project_id | default: topic_raw -%}
+{%- assign key_slug = base_key | slugify -%}
+
+{%- assign set1 = site.apis | where: 'project_id', base_key -%}
+{%- assign set2 = site.apis | where: 'project_id', key_slug -%}
+{%- assign set3 = site.apis | where: 'topic', topic_raw -%}
+{%- assign set4 = site.apis | where: 'topic', key_slug -%}
+
+{%- assign project_docs = set1 | concat: set2 | concat: set3 | concat: set4 | uniq -%}
+{%- assign siblings = project_docs | sort: 'nav_order' -%}
+{%- assign root_doc = project_docs | where: 'is_contents', true | first -%}
+{%- if root_doc == null -%}
+  {%- assign root_doc = siblings | first -%}
+{%- endif -%}
+
+{%- assign project_title = page.project_title
+  | default: root_doc.project_title
+  | default: topic_raw
+  | default: base_key
+-%}
+
+{%- comment -%}
+  ▼ 현재 페이지 URL의 /api/<slug>/ 프리픽스 기준으로 Contents URL을 재계산
+{%- endcomment -%}
+{%- assign root_url = root_doc.url -%}
+{%- assign prefix = null -%}
+{%- if page.url and page.url contains '/api/' -%}
+  {%- assign parts = page.url | split: '/' -%}
+  {%- assign slug = parts[2] -%}
+  {%- if slug and slug != '' -%}
+    {%- assign prefix = '/api/' | append: slug | append: '/' -%}
+    {%- assign found = null -%}
+    {%- for d in site.apis -%}
+      {%- if d.url and d.url contains prefix and d.is_contents -%}
+        {%- assign found = d.url -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if found -%}{%- assign root_url = found -%}{%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div class="api-sidebar-block">
+  <p class="api-back"><a href="{{ '/api/' | relative_url }}">&laquo; Back</a></p>
+
+  <!-- 프로젝트명: 클릭 시 Contents로 이동 -->
+  <a class="api-title-link" href="{{ root_url | relative_url }}">
+    {{ project_title }}
+  </a>
+
+  <ul class="api-subnav">
+    <!-- 항상 'Contents'를 맨 위에 -->
+    <li>
+      <a
+        class="api-link{% if root_url == page.url %} active{% endif %}"
+        href="{{ root_url | relative_url }}"
+        {% if root_url == page.url %}
+          aria-current="page"
+        {% endif %}
+      >
+        Contents
+      </a>
+    </li>
+
+    <!-- 나머지 항목들(01, 02 …) -->
+    {%- assign num = 0 -%}
+    {%- for s in siblings -%}
+      {%- if s.url and (prefix == nil or s.url contains prefix) and s.url != root_url -%}
+        {%- assign num = num | plus: 1 -%}
+        {%- capture numlabel -%}{% if num < 10 %}0{{ num }}{% else %}{{ num }}{% endif %}{%- endcapture -%}
+        <li>
+          <a
+            class="api-link{% if s.url == page.url %} active{% endif %}"
+            href="{{ s.url | relative_url }}"
+            {% if s.url == page.url %}
+              aria-current="page"
+            {% endif %}
+          >
+            <span class="api-index">{{ numlabel }}.</span> {{ s.title }}
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>
