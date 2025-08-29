@@ -12,3 +12,9 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 gem "wdm", "~> 0.2.0", :platforms => [:mingw, :x64_mingw, :mswin]
+
+
+# --- ADD: /blog 전용 페이지네이션 플러그인 ---
+group :jekyll_plugins do
+  gem "jekyll-paginate-v2"
+end

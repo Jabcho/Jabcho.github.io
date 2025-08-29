@@ -1,0 +1,42 @@
+---
+layout: default
+---
+<div class="page">
+  <article>
+    <header>
+      <h1>{{ page.title }}</h1>
+
+      {%- comment -%} 루트 문서(목차) 메타 계산 {%- endcomment -%}
+      {%- if page.project_id -%}
+        {%- assign root_doc = site.apis | where: 'project_id', page.project_id | where: 'is_contents', true | first -%}
+      {%- else -%}
+        {%- assign root_doc = site.apis | where: 'topic', page.topic | where: 'is_contents', true | first -%}
+      {%- endif -%}
+
+      {%- assign meta_version = page.version | default: root_doc.version -%}
+      {%- assign meta_updated = page.last_updated | default: root_doc.last_updated -%}
+      {%- assign meta_source = page.source_url | default: root_doc.source_url -%}
+
+      <div class="api-meta">
+        {%- if meta_version -%}
+          <span class="badge">Version: {{ meta_version }}</span>
+        {%- endif -%}
+        {%- if meta_updated -%}
+          <span class="badge">Updated: {{ meta_updated }}</span>
+        {%- endif -%}
+        {%- if meta_source -%}
+          <a class="badge" href="{{ meta_source }}" target="_blank" rel="noopener">공식 문서 원문</a>
+        {%- endif -%}
+      </div>
+    </header>
+
+    {{ content }}
+  </article>
+</div>
+
+<style>
+  #sidebar nav,
+  #sidebar .sidebar-bottom {
+    display: none !important;
+  }
+</style>
