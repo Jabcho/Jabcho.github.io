@@ -11,6 +11,8 @@ source_url: https://jekyllrb.com/docs/
 {% assign slug = page.project_id | default: page.topic | slugify %}
 
 목차:
-1. [01. Sample Contents 1]({{ '/api/' | append: slug | append: '/01/' | relative_url }})
-2. [02. Sample Contents 2]({{ '/api/' | append: slug | append: '/02/' | relative_url }})
-3. [03. Sample Contents 3]({{ '/api/' | append: slug | append: '/03/' | relative_url }})
+- [Getting Started]({{ '/api/' | append: slug | append: '/01/' | relative_url }})
+- [Build]({{ '/api/' | append: slug | append: '/02/' | relative_url }})
+- [Content]({{ '/api/' | append: slug | append: '/03/' | relative_url }})
+- [Site Structure]({{ '/api/' | append: slug | append: '/04/' | relative_url }})
+- [Guides]({{ '/api/' | append: slug | append: '/05/' | relative_url }})
