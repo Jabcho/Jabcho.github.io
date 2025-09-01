@@ -28,13 +28,9 @@
       <!-- the real tabs -->
       {%- assign sidebar_lang = include.lang | default: page.lang | default: site.lang | default: 'en' -%}
       {% for tab in site.tabs %}
-        {%- comment -%} 1) 활성화 여부를 먼저 변수로 계산 {%- endcomment -%}
         {%- assign tab_is_active = false -%}
-        {%- if tab.url == page.url -%}
-          {%- assign tab_is_active = true -%}
-        {%- endif -%}
+        {%- if tab.url == page.url -%}{%- assign tab_is_active = true -%}{%- endif -%}
 
-        {%- comment -%} 2) 탭 이름 키를 '마지막 경로 조각'으로 단일 문자열 보장 {%- endcomment -%}
         {%- assign parts = tab.url | split: '/' -%}
         {%- assign tab_key = parts | last -%}
         {%- if tab_key == '' and parts.size > 1 -%}
@@ -47,9 +43,24 @@
             <span>{{ site.data.locales[sidebar_lang].tabs[tab_key] | default: tab.title | upcase }}</span>
           </a>
         </li>
-        <!-- .nav-item -->
       {% endfor %}
     </ul>
+
+    {%- comment -%} UPDATE: API 문서에서는 상단 탭 목록만 숨기고(nav 컨테이너 유지), 같은 영역에 프로젝트 메뉴 삽입 {%- endcomment -%}
+    {%- assign is_api_detail = false -%}
+    {%- if page.url and page.url != '/api/' and page.url contains '/api/' -%}
+      {%- assign is_api_detail = true -%}
+    {%- endif -%}
+    {%- if page.layout == 'api_doc' -%}{%- assign is_api_detail = true -%}{%- endif -%}
+
+    {%- if is_api_detail -%}
+      <style>
+        #sidebar .nav {
+          display: none !important;
+        }
+      </style>
+      {% include api_sidebar.html %}
+    {%- endif -%}
   </nav>
 
   <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
@@ -57,44 +68,32 @@
       <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
         <i class="fas fa-adjust"></i>
       </button>
-
-      {% if site.data.contact.size > 0 %}
-        <span class="icon-border"></span>
-      {% endif %}
+      {% if site.data.contact.size > 0 %}<span class="icon-border"></span>{% endif %}
     {% endunless %}
 
     {% for entry in site.data.contact %}
       {% case entry.type %}
         {% when 'github', 'twitter' %}
-          {%- capture url -%}
-            https://{{ entry.type }}.com/{{ site[entry.type].username }}
-          {%- endcapture -%}
+          {%- capture url -%}https://{{ entry.type }}.com/{{ site[entry.type].username }}{%- endcapture -%}
         {% when 'email' %}
           {% assign email = site.social.email | split: '@' %}
-          {%- capture url -%}
-            javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
-          {%- endcapture -%}
+          {%- capture url -%}javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@'){%- endcapture -%}
         {% when 'rss' %}
           {% assign url = '/feed.xml' | relative_url %}
         {% else %}
           {% assign url = entry.url %}
       {% endcase %}
-
       {% if url %}
         <a
           href="{{ url }}"
           aria-label="{{ entry.type }}"
           {% assign link_types = '' %}
-
           {% unless entry.noblank %}
-            target="_blank"
-            {% assign link_types = 'noopener noreferrer' %}
+            target="_blank"{% assign link_types = 'noopener noreferrer' -%}
           {% endunless %}
-
           {% if entry.type == 'mastodon' %}
-            {% assign link_types = link_types | append: ' me' | strip %}
+            {%- assign link_types = link_types | append: ' me' | strip -%}
           {% endif %}
-
           {% unless link_types == empty %}
             rel="{{ link_types }}"
           {% endunless %}
@@ -104,24 +103,5 @@
       {% endif %}
     {% endfor %}
   </div>
-
-  {%- comment -%} ▼ API 상세 문서일 때만 프로젝트 메뉴 주입 {%- endcomment -%}
-  {%- assign is_api_detail = false -%}
-
-  {%- comment -%} /api/ 하위 페이지(인덱스 /api/ 본문은 제외) {%- endcomment -%}
-  {%- if page.url and page.url != '/api/' and page.url contains '/api/' -%}
-    {%- assign is_api_detail = true -%}
-  {%- endif -%}
-
-  {%- comment -%} 레이아웃이 api_doc인 경우(명시/상속) {%- endcomment -%}
-  {%- if page.layout == 'api_doc' -%}
-    {%- assign is_api_detail = true -%}
-  {%- endif -%}
-
-  {%- if is_api_detail -%}
-    {% include api_sidebar.html %}
-  {%- endif -%}
-
-  <!-- .sidebar-bottom -->
 </aside>
 <!-- #sidebar -->
