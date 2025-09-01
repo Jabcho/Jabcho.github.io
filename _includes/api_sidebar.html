@@ -16,27 +16,26 @@
 
 {%- assign project_docs = set1 | concat: set2 | concat: set3 | concat: set4 | uniq -%}
 {%- assign siblings = project_docs | sort: 'nav_order' -%}
-{%- assign root_doc = project_docs | where: 'is_contents', true | first -%}
-{%- if root_doc == null -%}
-  {%- assign root_doc = siblings | first -%}
-{%- endif -%}
 
+{%- assign root_doc = project_docs | where: 'is_contents', true | first -%}
+{%- if root_doc == null -%}{%- assign root_doc = siblings | first -%}{%- endif -%}
+
+{%- comment -%} UPDATE: 표시용 타이틀 케이스 보존(fallback에 root_doc.topic 추가) {%- endcomment -%}
 {%- assign project_title = page.project_title
   | default: root_doc.project_title
+  | default: root_doc.topic
   | default: topic_raw
   | default: base_key
 -%}
 
-{%- comment -%}
-  ▼ 현재 페이지 URL의 /api/<slug>/ 프리픽스 기준으로 Contents URL을 재계산
-{%- endcomment -%}
+{%- comment -%} ▼ 현재 페이지 URL의 /api/<project>/ 프리픽스 기준으로 Contents URL을 재계산 {%- endcomment -%}
 {%- assign root_url = root_doc.url -%}
 {%- assign prefix = null -%}
 {%- if page.url and page.url contains '/api/' -%}
   {%- assign parts = page.url | split: '/' -%}
-  {%- assign slug = parts[2] -%}
-  {%- if slug and slug != '' -%}
-    {%- assign prefix = '/api/' | append: slug | append: '/' -%}
+  {%- assign project_slug = parts[2] -%}
+  {%- if project_slug and project_slug != '' -%}
+    {%- assign prefix = '/api/' | append: project_slug | append: '/' -%}
     {%- assign found = null -%}
     {%- for d in site.apis -%}
       {%- if d.url and d.url contains prefix and d.is_contents -%}
@@ -45,6 +44,30 @@
       {%- endif -%}
     {%- endfor -%}
     {%- if found -%}{%- assign root_url = found -%}{%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- comment -%} UPDATE: URL로 찾은 루트 문서의 제목으로 보정(없으면 topic으로 보정) {%- endcomment -%}
+{%- assign root_doc_by_url = site.apis | where: 'url', root_url | first -%}
+{%- if root_doc_by_url -%}
+  {%- assign project_title = root_doc_by_url.project_title | default: root_doc_by_url.topic | default: project_title -%}
+{%- endif -%}
+
+{%- comment -%}
+  UPDATE: docs 경로 하이라이트 자동 매핑
+  /api/<project>/docs/<chapter>/<slug>/ → /api/<project>/<chapter>/
+{%- endcomment -%}
+{%- assign active_url = page.url -%}
+{%- if page.url and page.url contains '/api/' and page.url contains '/docs/' -%}
+  {%- assign parts = page.url | split: '/' -%}
+  {%- assign project_slug = parts[2] -%}
+  {%- assign chapter_slug = parts[4] -%}
+  {%- assign chapter_url = '/api/' | append: project_slug | append: '/' | append: chapter_slug | append: '/' -%}
+  {%- assign chapter_doc = site.apis | where: 'url', chapter_url | first -%}
+  {%- if chapter_doc -%}
+    {%- assign active_url = chapter_url -%}
+  {%- else -%}
+    {%- assign active_url = root_url -%}
   {%- endif -%}
 {%- endif -%}
 
@@ -60,31 +83,32 @@
     <!-- 항상 'Contents'를 맨 위에 -->
     <li>
       <a
-        class="api-link{% if root_url == page.url %} active{% endif %}"
+        class="api-link{% if root_url == active_url %} active{% endif %}"
         href="{{ root_url | relative_url }}"
-        {% if root_url == page.url %}
+        {% if root_url == active_url %}
           aria-current="page"
         {% endif %}
+        >Contents</a
       >
-        Contents
-      </a>
     </li>
 
     <!-- 나머지 항목들(01, 02 …) -->
     {%- assign num = 0 -%}
     {%- for s in siblings -%}
+      {%- comment -%} UPDATE: docs/ 아래 문서는 목록에서 제외 {%- endcomment -%}
+      {%- if s.path and s.path contains '/docs/' -%}{% continue %}{%- endif -%}
+
       {%- if s.url and (prefix == nil or s.url contains prefix) and s.url != root_url -%}
         {%- assign num = num | plus: 1 -%}
         {%- capture numlabel -%}{% if num < 10 %}0{{ num }}{% else %}{{ num }}{% endif %}{%- endcapture -%}
         <li>
           <a
-            class="api-link{% if s.url == page.url %} active{% endif %}"
+            class="api-link{% if s.url == active_url %} active{% endif %}"
             href="{{ s.url | relative_url }}"
-            {% if s.url == page.url %}
+            {% if s.url == active_url %}
               aria-current="page"
             {% endif %}
-          >
-            <span class="api-index">{{ numlabel }}.</span> {{ s.title }}
+            ><span class="api-index">{{ numlabel }}.</span> {{ s.title -}}
           </a>
         </li>
       {%- endif -%}
