@@ -148,7 +148,7 @@ layout: default
 ## Front matter defaults
 이제 저자 문서들이 <code class="code-inline">author</code> 레이아웃을 사용하도록 설정해야 한다. 이전에 했던 것처럼 각 문서의 Front matter에 설정할 수도 있지만, 같은 작업을 계속 반복해야 해서 번거롭다.
 
-모든 게시글은 post, 저자 문서는 author, 그 외 문서들은 default 레이아웃이 적용되도록 하려면 _config.yml에 [front matter defaults]({% link _apis/jekyll/docs/01/front_matter_defaults.md %})을 설정하면 된다.
+모든 게시글은 post, 저자 문서는 author, 그 외 문서들은 default 레이아웃이 적용되도록 하려면 _config.yml에 [front matter defaults]({% link _apis/jekyll/docs/02/front_matter_defaults.md %})을 설정하면 된다.
 
 ```yaml
 collections:

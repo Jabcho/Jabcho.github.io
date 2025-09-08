@@ -106,7 +106,7 @@ Jekyll 서버를 재시작하여 <code class="code-inline"><head></code>에 해�
 ## Environments
 개발에서는 사용하지 않고 배포 시에만 출력하고 싶은 경우도 있을 수 있다. 대표적으로 분석 스크립트(Analytics scripts)가 그렇다.
 
-이럴 때 [환경(environments)]({% link _apis/jekyll/docs/01/environments.md %})을 사용한다. 명령 실행 시 <code class="code-inline">JEKYLL_ENV</code> 환경 변수를 사용해 환경을 설정할 수 있다:
+이럴 때 [환경(environments)]({% link _apis/jekyll/docs/02/environments.md %})을 사용한다. 명령 실행 시 <code class="code-inline">JEKYLL_ENV</code> 환경 변수를 사용해 환경을 설정할 수 있다:
 
 ```terminal
 JEKYLL_ENV=production bundle exec jekyll build
