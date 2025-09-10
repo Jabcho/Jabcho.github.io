@@ -24,20 +24,6 @@ nav_order: 2
 .wrap-table th:nth-child(2), .wrap-table td:nth-child(2){text-align:center}
 /* ★ 헤더 행(th) 전체를 가운데 정렬 */
 .wrap-table thead th{text-align:center}
-/* 버전 노란색 배경 표기 */
-.ver-badge{
-  display:inline-block;
-  padding:.12em .55em;
-  font-size:.75em;        /* 본문보다 약간 작게 */
-  font-weight:700;
-  line-height:1.6;
-  color:#1f2937;          /* 어두운 회색 글자 */
-  background:#facc15;     /* 노란 배경(amber-400 계열) */
-  border:1px solid #eab308;
-  border-radius:.5em;     /* 둥근 모서리(알약 모양) */
-  vertical-align:middle;
-  white-space:nowrap;     /* 숫자가 줄바꿈되지 않게 */
-}
 </style>
 
 <table class="wrap-table">
@@ -53,15 +39,15 @@ nav_order: 2
   </thead>
   <tbody>
     <tr>
-      <td><strong>사이트 소스(Site source)</strong><br>Jekyll이 파일을 읽을 디렉터리를 변경.</td>
+      <td><strong>사이트 소스(Site source)</strong><br>Jekyll이 파일을 읽을 디렉터리를 변경한다.</td>
       <td><code class="code-inline">source: DIR</code><br><code class="code-inline">-s, --source DIR</code></td>
     </tr>
     <tr>
-      <td><strong>사이트 출력 위치(Site destination)</strong><br>Jekyll이 파일을 쓸 디렉터리를 변경.</td>
+      <td><strong>사이트 출력 위치(Site destination)</strong><br>Jekyll이 파일을 쓸 디렉터리를 변경한다.</td>
       <td><code class="code-inline">destination: DIR</code><br><code class="code-inline">-d, --destination DIR</code></td>
     </tr>
     <tr>
-      <td><strong>안전 모드(Safe)</strong><br><a href="#">허용 목록 외 플러그인</a> 및 디스크 캐시 비활성화, 심볼릭 링크 무시.</td>
+      <td><strong>안전 모드(Safe)</strong><br><a href="#">허용 목록 외 플러그인</a> 및 디스크 캐시를 비활성화하며, 심볼릭 링크는 무시한다.</td>
       <td><code class="code-inline">safe: BOOL</code><br><code class="code-inline">--safe</code></td>
     </tr>
     <tr>
@@ -165,20 +151,36 @@ nav_order: 2
     <tr><td><strong>LSI</strong><br>관련 게시글의 색인을 생성한다.(<code class="code-inline"><a href="https://jekyll.github.io/classifier-reborn/">classifier-reborn</a></code> 플러그인 필요).</td><td><code class="code-inline">lsi: BOOL</code><br><code class="code-inline">--lsi</code></td></tr>
     <tr><td><strong>게시물 제한(Limit posts)</strong><br>파싱·게시할 게시글 수를 제한한다.</td><td><code class="code-inline">limit_posts: NUM</code><br><code class="code-inline">--limit_posts NUM</code></td></tr>
     <tr><td><strong>강제 폴링(Force polling)</strong><br>watch가 폴링(polling) 방식을 사용하도록 강제한다.</td><td><code class="code-inline">force_polling: BOOL</code><br><code class="code-inline">--force_polling</code></td></tr>
-    <tr><td><strong>자세한 출력 (Verbose)</strong><br>상세 로그 출력.</td><td><code class="code-inline">verbose: BOOL</code><br><code class="code-inline">-V, --verbose</code></td></tr>
-    <tr><td><strong>정숙 출력 (Quiet)</strong><br>일반 출력 억제.</td><td><code class="code-inline">quiet: BOOL</code><br><code class="code-inline">-q, --quiet</code></td></tr>
-    <tr><td><strong>로그 레벨 (Log level)</strong><br><code class="code-inline">debug</code> · <code class="code-inline">info</code> · <code class="code-inline">warn</code> · <code class="code-inline">error</code> 중 지정.</td><td><code class="code-inline">JEKYLL_LOG_LEVEL=info</code></td></tr>
-    <tr><td><strong>증분 빌드 (Incremental build)</strong><br>변경된 항목만 재빌드(실험적).</td><td><code class="code-inline">incremental: BOOL</code><br><code class="code-inline">-I, --incremental</code></td></tr>
-    <tr><td><strong>Bundler require 비활성화</strong><br>Gemfile <code class="code-inline">:jekyll_plugins</code>에서 <code class="code-inline">require</code> 생략.</td><td><code class="code-inline">JEKYLL_NO_BUNDLER_REQUIRE=true</code></td></tr>
-    <tr><td><strong>Liquid 프로파일러</strong><br>Liquid 렌더링 프로파일 생성.</td><td><code class="code-inline">profile: BOOL</code><br><code class="code-inline">--profile</code></td></tr>
-    <tr><td><strong>엄격한 프런트 매터</strong><br>프런트 매터 YAML 오류 시 빌드 실패.</td><td><code class="code-inline">strict_front_matter: BOOL</code><br><code class="code-inline">--strict_front_matter</code></td></tr>
-    <tr><td><strong>웹 도메인 URL (Web Domain URL)</strong><br>프로덕션 루트의 정규 URL. 끝에 슬래시 금지. <code class="code-inline">absolute_url</code> 사용 시 <code class="code-inline">baseurl</code>과 결합. <code class="code-inline">jekyll serve</code> 실행 시 <code class="code-inline">localhost</code>로 자동 설정.</td><td><code class="code-inline">url: SCHEME://HOST[:PORT]</code></td></tr>
-    <tr><td><strong>기본 경로 (Base URL)</strong><br>도메인 루트와 랜딩 페이지 사이 하위 경로.</td><td><code class="code-inline">baseurl: /PATH/TO/SITE</code><br><code class="code-inline">-b, --baseurl /PATH/TO/SITE</code></td></tr>
-    <tr><td><strong>추적 (Trace)</strong><br>에러 발생 시 전체 백트레이스 출력.</td><td><code class="code-inline">-t, --trace</code></td></tr>
+    <tr><td><strong>상세 출력(Verbose Output)</strong><br>상세한 진단 정보를 표시한다.</td><td><code class="code-inline">verbose: BOOL</code><br><code class="code-inline">-V, --verbose</code></td></tr>
+    <tr><td><strong>출력 숨김(Silence output)</strong><br>빌드 중 일반 로그 출력을 숨긴다.</td><td><code class="code-inline">quiet: BOOL</code><br><code class="code-inline">-q, --quiet</code></td></tr>
+    <tr><td><strong>로그 레벨(Log level)</strong><br>로그 레벨(debug, info, warn, error)을 지정한다.</td><td><code class="code-inline">JEKYLL_LOG_LEVEL=info</code></td></tr>
+    <tr><td><strong>증분 빌드(Incremental build)</strong><br>
+    실험 단계인 <a href="#">증분 빌드(Incremental build)</a>를 활성화한다. 증분 빌드는 변경된 게시글과 페이지만 다시 생성하여 대형 사이트의 빌드 성능을 크게 향상시킨다. 다만 아직까지 특정 상황에서는 사이트 생성 결과가 완전하지 않을 수 있다.</td><td><code class="code-inline">incremental: BOOL</code><br><code class="code-inline">-I, --incremental</code></td></tr>
+    <tr><td><strong>번들(bundle) 요청 비활성화</strong><br>
+    Gemfile의 `:jekyll_plugins`에 있는 gem을 자동으로 요청하지 않도록 비활성화한다.</td><td><code class="code-inline">JEKYLL_NO_BUNDLER_REQUIRE=true</code></td></tr>
+    <tr><td><strong>Liquid 프로파일러(Liquid profiler)</strong><br>
+    Liquid 렌더링 프로파일을 생성하여 병목현상의 원인을 파악할 수 있다.</td><td><code class="code-inline">profile: BOOL</code><br><code class="code-inline">--profile</code></td></tr>
+    <tr><td><strong>Strict front matter</strong><br>
+    Front matter에 YANL 문법 오류가 있을 경우 빌드를 실패로 처리한다.</td><td><code class="code-inline">strict_front_matter: BOOL</code><br><code class="code-inline">--strict_front_matter</code></td></tr>
+    <tr><td><strong>웹 도메인 URL (Web Domain URL)</strong><br>
+    운영 배포 루트의 정규 URL은 다음 요소들로 구성한다:<br>
+    <ul> 
+    <li>프로토콜 스킴(Protocol scheme)(예: <code class="code-inline">http://</code>)</li>
+    <li>호스트명 또는 IP 주소(예: <code class="code-inline">example.org</code>)</li>
+    <li>(선택)서버의 포트 번호. 콜론(:)을 앞에 붙인다.(예: <code class="code-inline">:8000</code>)</li>
+    </ul>
+    이 때 URL 끝에 슬래시(/)를 붙이지 않는다. <code class="code-inline">absolute_url</code> Liquid 필터를 사용할 때 Jekyll 사이트의 <code class="code-inline">baseurl</code>과 결합되어 사이트의 전체 URL을 만들기 때문이다.<br>
+    참고: <code class="code-inline">jekyll serve</code> 명령을 실행하면 **localhost URL**로 자동 설정 된다.</td><td><code class="code-inline">url: SCHEME://HOST[:PORT]</code></td></tr>
+    <tr><td><strong>기본 경로(Base URL)</strong><br>지정한 베이스 URL에서 웹사이트를 제공한다(웹 서버 또는 도메인 루트와 랜딩 페이지 사이의 경로).</td><td><code class="code-inline">baseurl: /PATH/TO/SITE</code><br><code class="code-inline">-b, --baseurl /PATH/TO/SITE</code></td></tr>
+    <tr><td><strong>추적(Trace)</strong><br>에러 발생 시 전체 백트레이스(backtrace)를 출력한다.</td><td><code class="code-inline">-t, --trace</code></td></tr>
   </tbody>
 </table>
 
+<br>
+
 ### Serve Command Options
+<br>
+아래 옵션들 외에도 <code class="code-inline">serve</code> 하위 명령은 <code class="code-inline">build</code>하위 명령의 모든 옵션을 받을 수 있으며, 이는 서비스 시작 직전에 수행되는 빌드 과정에 적용된다.
 
 <style>
 .wrap-table{width:100%;table-layout:fixed;border-collapse:collapse}
@@ -193,8 +195,8 @@ nav_order: 2
 
 <table class="wrap-table">
   <colgroup>
-    <col style="width:64%">
-    <col style="width:36%">
+    <col style="width:55%">
+    <col style="width:45%">
   </colgroup>
   <thead>
     <tr>
@@ -203,22 +205,25 @@ nav_order: 2
     </tr>
   </thead>
   <tbody>
-    <tr><td><strong>로컬 서버 포트</strong><br>지정 포트로 리슨(기본 4000).</td><td><code class="code-inline">port: PORT</code><br><code class="code-inline">-P, --port PORT</code></td></tr>
-    <tr><td><strong>로컬 서버 호스트명</strong><br>지정 호스트명으로 리슨(기본 localhost).</td><td><code class="code-inline">host: HOSTNAME</code><br><code class="code-inline">-H, --host HOSTNAME</code></td></tr>
-    <tr><td><strong>라이브 리로드</strong><br>콘텐츠 변경 시 브라우저 자동 새로고침.</td><td><code class="code-inline">livereload: BOOL</code><br><code class="code-inline">-l, --livereload</code></td></tr>
-    <tr><td><strong>라이브 리로드 무시</strong><br>무시할 글로브 패턴. CLI 전달 시 인용(따옴표) 권장. 패턴은 <code class="code-inline">relative_path</code> 기준. 필요 시 구성 파일에 나열.</td><td><code class="code-inline">livereload_ignore: [GLOB1,...]</code><br><code class="code-inline">--livereload-ignore GLOB1[,GLOB2,...]</code></td></tr>
-    <tr><td><strong>라이브 리로드 지연</strong><br>자동 새로고침 최소/최대 지연(초).</td><td><code class="code-inline">livereload_min_delay: SECONDS</code><br><code class="code-inline">livereload_max_delay: SECONDS</code><br><code class="code-inline">--livereload-min-delay SECONDS</code><br><code class="code-inline">--livereload-max-delay SECONDS</code></td></tr>
-    <tr><td><strong>라이브 리로드 포트</strong><br>LiveReload 포트(4.4.0부터 구성 파일로 재정의 가능).</td><td><code class="code-inline">livereload_port: PORT</code><br><code class="code-inline">--livereload-port PORT</code></td></tr>
-    <tr><td><strong>URL 열기</strong><br>서버 시작 시 사이트 URL을 브라우저에서 열기.</td><td><code class="code-inline">open_url: BOOL</code><br><code class="code-inline">-o, --open-url</code></td></tr>
-    <tr><td><strong>분리 실행 (Detach)</strong><br>서버를 터미널에서 분리.</td><td><code class="code-inline">detach: BOOL</code><br><code class="code-inline">-B, --detach</code></td></tr>
-    <tr><td><strong>초기 빌드 건너뛰기</strong><br>서버 시작 전 초기 빌드 생략.</td><td><code class="code-inline">skip_initial_build: BOOL</code><br><code class="code-inline">--skip-initial-build</code></td></tr>
-    <tr><td><strong>디렉터리 목록 표시</strong><br>인덱스 대신 디렉터리 목록 노출.</td><td><code class="code-inline">show_dir_listing: BOOL</code><br><code class="code-inline">--show-dir-listing</code></td></tr>
-    <tr><td><strong>X.509(SSL) 개인 키</strong><br>사이트 소스에 저장/심볼릭 링크된 개인 키 경로.</td><td><code class="code-inline">--ssl-key</code></td></tr>
-    <tr><td><strong>X.509(SSL) 인증서</strong><br>사이트 소스에 저장/심볼릭 링크된 공개 인증서 경로.</td><td><code class="code-inline">--ssl-cert</code></td></tr>
+    <tr><td><strong>로컬 서버 포트(Local server port)</strong><br>지정한 포트에서 수신 대기한다. 기본값은 `4000`이다.</td><td><code class="code-inline">port: PORT</code><br><code class="code-inline">-P, --port PORT</code></td></tr>
+    <tr><td><strong>로컬 서버 호스트명(Local server hostname)</strong><br>지정 호스트명에서 수신 대기한다. 기본값은 `localhost`이다.</td><td><code class="code-inline">host: HOSTNAME</code><br><code class="code-inline">-H, --host HOSTNAME</code></td></tr>
+    <tr><td><strong>Live reload</strong><br>내용 변경 시 브라우저에 페이지가 자동으로 다시 로드된다.</td><td><code class="code-inline">livereload: BOOL</code><br><code class="code-inline">-l, --livereload</code></td></tr>
+    <tr><td><strong>Live reload 무시</strong><br>
+    LiveReload를 적용하지 않을 파일 glob 패턴을 지정한다.<br><br>
+    명령줄로 전달할 때는 셸 확장을 막기 위해 패턴을 따옴표로 감싸야 한다.<br><br>
+    <strong>참고:</strong> 지정한 glob 패턴은 처리된 리소스의 <code class="code-inline">relative_path</code> 속성과 매칭된다. 패턴을 따옴표로 감쌌음에도 해당 *relative_path*를 가진 항목이 재로드된다면, 설정 파일(config file)의 옵션 키 아래에 해당 패턴들을 추가해보라.</td><td><code class="code-inline">livereload_ignore: [GLOB1,...]</code><br><code class="code-inline">--livereload-ignore GLOB1[,GLOB2,...]</code></td></tr>
+    <tr><td><strong>Live reload 지연(Live reload min/max delay)</strong><br>자동으로 새로고침되는 최소/최대 지연 시간을 지정할 수 있다.</td><td><code class="code-inline">livereload_min_delay: SECONDS</code><br><code class="code-inline">livereload_max_delay: SECONDS</code><br><code class="code-inline">--livereload-min-delay SECONDS</code><br><code class="code-inline">--livereload-max-delay SECONDS</code></td></tr>
+    <tr><td><strong>Live reload port</strong><br>LiveReload가 수신 대기할  포트를 지정한다. <span class="ver-badge">4.4.0</span>부터 설정 파일에서 재정의할 수 있다.</td><td><code class="code-inline">livereload_port: PORT</code><br><code class="code-inline">--livereload-port PORT</code></td></tr>
+    <tr><td><strong>URL 열기(Open URL)</strong><br>서버가 시작되면 브라우저를 자동으로 열어 사이트 주소로 연결한다.</td><td><code class="code-inline">open_url: BOOL</code><br><code class="code-inline">-o, --open-url</code></td></tr>
+    <tr><td><strong>분리 실행(Detach)</strong><br>서버를 터미널에서 분리한다.</td><td><code class="code-inline">detach: BOOL</code><br><code class="code-inline">-B, --detach</code></td></tr>
+    <tr><td><strong>초기 빌드 건너뛰기(Skips the initial site build)</strong><br>서버 시작 전 초기 빌드를 생략한다.</td><td><code class="code-inline">skip_initial_build: BOOL</code><br><code class="code-inline">--skip-initial-build</code></td></tr>
+    <tr><td><strong>디렉터리 목록 표시(Show directory listing)</strong><br>인덱스 파일 대신 디렉터리 목록을 보여준다.</td><td><code class="code-inline">show_dir_listing: BOOL</code><br><code class="code-inline">--show-dir-listing</code></td></tr>
+    <tr><td><strong>X.509(SSL) 개인 키(private key)</strong><br>사이트 소스에 저장/심볼릭 링크된 개인 키 경로를 지정한다.</td><td><code class="code-inline">--ssl-key</code></td></tr>
+    <tr><td><strong>X.509(SSL) 인증서(certificate)</strong><br>사이트 소스에 저장/심볼릭 링크된 공개 인증서 경로를 지정한다.</td><td><code class="code-inline">--ssl-cert</code></td></tr>
   </tbody>
 </table>
 
-구성 파일에서 탭 사용 금지
-
-구성 파일에 탭 문자를 사용하면 파싱 오류가 발생하거나 기본 설정으로 되돌아갈 수 있다.  
-반드시 **스페이스**를 사용할 것.
+<div class="red-caution">
+⚠️ 설정 파일에서 탭 사용 금지
+구성 파일에 탭 문자를 사용하면 파싱 오류가 발생하거나 기본 설정으로 되돌아갈 수 있다. 탭 대신 스페이스를 사용하라.
+</div>

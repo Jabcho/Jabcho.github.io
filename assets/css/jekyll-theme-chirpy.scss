@@ -188,3 +188,18 @@ code.code-inline {
   margin: 1em 0;
   background: #fff;
 }
+
+/* 버전 노란색 배경 표기 */
+.ver-badge {
+  display: inline-block;
+  padding: 0.12em 0.55em;
+  font-size: 0.75em; /* 본문보다 약간 작게 */
+  font-weight: 700;
+  line-height: 1.6;
+  color: #1f2937; /* 어두운 회색 글자 */
+  background: #facc15; /* 노란 배경(amber-400 계열) */
+  border: 1px solid #eab308;
+  border-radius: 0.5em; /* 둥근 모서리(알약 모양) */
+  vertical-align: middle;
+  white-space: nowrap; /* 숫자가 줄바꿈되지 않게 */
+}
