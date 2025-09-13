@@ -189,6 +189,13 @@ code.code-inline {
   background: #fff;
 }
 
+.yellow-caution {
+  border-left: 6px solid rgb(126, 112, 8);
+  padding: 0.8em 1em;
+  margin: 1em 0;
+  background: #fff;
+}
+
 /* 버전 노란색 배경 표기 */
 .ver-badge {
   display: inline-block;
