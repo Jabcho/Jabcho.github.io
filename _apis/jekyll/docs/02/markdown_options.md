@@ -58,7 +58,7 @@ kramdown:
   header_offset: 2
 ```
 
-<div class="red-caution">
+<div class="red-caution"  markdown="1">
 ⚠️ 지원되지 않는 kramdown 옵션
 Jekyll은 Kramdown의 HTML 변환기를 사용한다. 따라서 RemoveHtmlTags 변환기에서 사용하는 <code class="code-inline">remove_block_html_tags</code>처럼 다른 변환기에서만 쓰이는 Kramdown 옵션은 동작하지 않는다.
 </div>
