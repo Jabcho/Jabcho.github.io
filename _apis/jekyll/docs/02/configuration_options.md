@@ -101,7 +101,7 @@ nav_order: 2
     <tr>
       <td><strong>기본값 (Defaults)</strong><br>
       <a href="#">Front Matter</a> 변수의 기본값을 설정한다.</td>
-      <td><a href="./front_matter_defaults.md">아래</a> 참조</td>
+      <td><a href="/api/jekyll/docs/02/front_matter_defaults/">아래</a> 참조</td>
     </tr>
   </tbody>
 </table>
