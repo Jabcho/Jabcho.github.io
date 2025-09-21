@@ -35,5 +35,5 @@ JEKYLL_ENV=production jekyll build
 빌드 명령에서 옵션을 지정함으로서, 환경을 바꿀 때마다 설정 파일의 값을 고쳐야 하는 수고를 피할 수 있다.
 
 <div class="yellow-caution" markdown="1">
-✨ 환경에 따라 일부 설정을 전환하려면 빌드 옵션 <code class="code-inline">--config, _config.yml,_config_development.yml</code> 같은 [build command option]({% link _apis/jekyll/docs/02/configuration_options.md %}#build_command_options)을 사용하라. 뒤에 나열된 파일의 앞의 파일의 설정을 덮어쓴다.
+✨ 환경에 따라 일부 설정을 전환하려면 빌드 옵션 <code class="code-inline">--config, _config.yml,_config_development.yml</code> 같은 [build command option]({% link _apis/jekyll/docs/02/configuration_options.md %}#build-command-options)을 사용하라. 뒤에 나열된 파일의 앞의 파일의 설정을 덮어쓴다.
 </div>

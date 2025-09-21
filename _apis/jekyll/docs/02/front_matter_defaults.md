@@ -10,7 +10,7 @@ nav_order: 2
 > 전체 목차는 [Contents]({{ '/api/' | append: page.project_id | append: '/contents/' | relative_url }})에서 확인하세요.
 
 <br>
-[Front matter]({% link _apis/jekyll/03.md %}#front_matter)를 사용하여 페이지와 게시글 설정을 지정할 수 있다. 기본 레이아웃을 지정, 제목(title) 커스터마이징, 게시글의 정확한 날짜/시간 지정 등을 할 수 있다.
+[Front matter]({% link _apis/jekyll/03.md %}#front-matter)를 사용하여 페이지와 게시글 설정을 지정할 수 있다. 기본 레이아웃을 지정, 제목(title) 커스터마이징, 게시글의 정확한 날짜/시간 지정 등을 할 수 있다.
 
 종종 동일한 설정을 여러 번 반복하는 일이 발생한다. 예를 들어 모든 파일에 같은 layout을 지정하거나, 게시글에 한 개 이상의 동일한 카테고리를 추가하는 식이다. 심지어 동일한 저자명(author names) 등 대부분의 블로그 게시글에서 같을 확률이 높은 사용자 정의 변수를 매번 추가하기도 한다.
 
