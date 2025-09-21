@@ -33,7 +33,7 @@ kramdown:
 Kramdown 파서에 관련 내용은 [Kramdown 문서](https://kramdown.gettalong.org/parser/kramdown.html)에서 확인할 수 있다. Kramdown이나 GFM 외의 Kramdown 파서를 사용한다면 해당 파서용 gem을 추가해야 한다.
 
 ### Syntax Highlighting (CodeRay)
-Kramdown에서 [CodeRay](http://coderay.rubychan.de/) 구문 하이라이터를 사용하려면 <code class="code-inline">kramdown-syntax-coderay</code> gem에 대한 의존성을 추가해야 한다(예: <code class="code-inline">bundle add kramdown-syntax-coderay</code>). 이제 <code class="code-inline">syntax_highlighter</code> 설정에 CodeRay를 지정할 수 있다:
+Kramdown에서 [CodeRay](https://coderay.rubychan.de/) 구문 하이라이터를 사용하려면 <code class="code-inline">kramdown-syntax-coderay</code> gem에 대한 의존성을 추가해야 한다(예: <code class="code-inline">bundle add kramdown-syntax-coderay</code>). 이제 <code class="code-inline">syntax_highlighter</code> 설정에 CodeRay를 지정할 수 있다:
 
 ```yaml
 kramdown:
