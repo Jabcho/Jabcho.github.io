@@ -1,0 +1,22 @@
+---
+title: Write scripts to test API response data in Postman
+project_id: postman   # ← 01.md, contents.md와 동일하게
+is_contents: false   # Contents 문서가 아니라면 기본 false (생략 가능)
+active_url: /api/postman/04/
+nav_order: 4  
+---
+
+> 이 문서는 공식 레퍼런스를 바탕으로 한 한국어 번역·주해본입니다.  
+> 전체 목차는 [Contents]({{ '/api/' | append: page.project_id | append: '/contents/' | relative_url }})에서 확인하세요.
+
+<br>
+
+## Testing in Postman
+## Add a post-response test
+## Validate responses
+## Format test result messages using pm.expect
+## Test collections and folders
+## Write tests using Postbot
+## Add documentation to post-response scripts
+## Debug your tests
+## Next steps

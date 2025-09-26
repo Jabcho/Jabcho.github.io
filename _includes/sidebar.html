@@ -1,12 +1,10 @@
 <!-- The Side Bar -->
 
-<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end" style="z-index:999;">
   <header class="profile-wrapper">
     <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle">
       {%- if site.avatar != empty and site.avatar -%}
-        {%- capture avatar_url -%}
-          {% include media-url.html src=site.avatar %}
-        {%- endcapture -%}
+        {%- capture avatar_url -%}{% include media-url.html src=site.avatar %}{%- endcapture -%}
         <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
       {%- endif -%}
     </a>
@@ -16,20 +14,54 @@
   </header>
   <!-- .profile-wrapper -->
 
+  {%- comment -%} UPDATE: API 페이지 감지(한 줄) {%- endcomment -%}
+  {%- assign is_api_detail = (page.collection == 'apis') or (page.layout == 'api_doc') or (page.url and page.url != '/api/' and page.url contains '/api/') -%}
+
+  {%- if is_api_detail -%}
+    <!-- 가시성 강제: nav 숨김 + 커스텀 사이드바는 항상 보이게 -->
+    <style>
+      #sidebar .nav {
+        display: none !important;
+      }
+      #api-sidebar-mount {
+        display: block !important;
+        position: relative;
+        z-index: 2;
+      }
+      #sidebar .api-sidebar-block {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      #sidebar .api-sidebar-block a {
+        pointer-events: auto !important;
+      }
+      #sidebar {
+        overflow: visible !important;
+      } /* 상위 overflow로 잘리는 경우 방지 */
+    </style>
+
+    {%- comment -%} UPDATE: nav 바깥에서 먼저 주입 (스타일 간섭 최소화) {%- endcomment -%}
+    <div id="api-sidebar-mount" class="w-100 pe-2">
+      {% include api_sidebar.html %}
+    </div>
+  {%- endif -%}
+
   <nav class="flex-column flex-grow-1 w-100 ps-0">
+    {%- assign sidebar_lang = include.lang | default: page.lang | default: site.lang | default: 'en' -%}
+
     <ul class="nav">
       <!-- home -->
       <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}">
         <a href="{{ '/' | relative_url }}" class="nav-link">
           <i class="fa-fw fas fa-home"></i>
-          <span>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
+          <span>{{ site.data.locales[sidebar_lang].tabs.home | default: 'Home' | upcase }}</span>
         </a>
       </li>
-      <!-- the real tabs -->
-      {%- assign sidebar_lang = include.lang | default: page.lang | default: site.lang | default: 'en' -%}
+
+      <!-- tabs -->
       {% for tab in site.tabs %}
-        {%- assign tab_is_active = false -%}
-        {%- if tab.url == page.url -%}{%- assign tab_is_active = true -%}{%- endif -%}
+        {%- assign tab_is_active = (tab.url == page.url) -%}
 
         {%- assign parts = tab.url | split: '/' -%}
         {%- assign tab_key = parts | last -%}
@@ -45,25 +77,9 @@
         </li>
       {% endfor %}
     </ul>
-
-    {%- comment -%} UPDATE: API 문서에서는 상단 탭 목록만 숨기고(nav 컨테이너 유지), 같은 영역에 프로젝트 메뉴 삽입 {%- endcomment -%}
-    {%- assign is_api_detail = false -%}
-    {%- if page.url and page.url != '/api/' and page.url contains '/api/' -%}
-      {%- assign is_api_detail = true -%}
-    {%- endif -%}
-    {%- if page.layout == 'api_doc' -%}{%- assign is_api_detail = true -%}{%- endif -%}
-
-    {%- if is_api_detail -%}
-      <style>
-        #sidebar .nav {
-          display: none !important;
-        }
-      </style>
-      {% include api_sidebar.html %}
-    {%- endif -%}
   </nav>
 
-  <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
+  <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
     {% unless site.theme_mode %}
       <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
         <i class="fas fa-adjust"></i>
