@@ -210,3 +210,10 @@ code.code-inline {
   vertical-align: middle;
   white-space: nowrap; /* 숫자가 줄바꿈되지 않게 */
 }
+.icon-inline {
+  display: inline-block; /* 전역 img {display:block}인 테마도 대응 */
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom; /* 글줄 기준선에 맞춤(취향에 따라 middle) */
+  margin-right: 0.35rem; /* 아이콘-텍스트 간격 */
+}
