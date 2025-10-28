@@ -1,9 +1,9 @@
 ---
-title: Install and update Postman
+title: Roles and permissions
 project_id: postman   # ← 01.md, contents.md와 동일하게
 is_contents: false   # Contents 문서가 아니라면 기본 false (생략 가능)
-active_url: /api/postman/02/04_install/
-nav_order: 2  
+active_url: /api/postman/08/
+nav_order: 8
 ---
 
 > 이 문서는 공식 레퍼런스를 바탕으로 한 한국어 번역·주해본입니다.  
@@ -11,15 +11,16 @@ nav_order: 2
 
 <br>
 
-## Install Postman on Windows
-## Install Postman on Mac
-## Install Postman on Linux
-## Use the Postman web app
+# Define roles and permissions within a Postman team
 
-### Install the Postman Desktop Agent
-### Web limitations
-
-## Use the Postman VS Code extension
-## Update Postman
-## Use Postman behind a firewall
-## Troubleshoot your Postman installation
+## Team roles
+## Workspace roles
+## Element-based roles
+## Collection roles
+## API roles
+## Environment roles
+## Mock server roles
+## Monitor roles
+## Partner team and Partner Workspace roles
+## Network roles
+## Next steps

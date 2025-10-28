@@ -11,9 +11,9 @@ nav_order: 13
 
 <br>
 
-# Integrate Postman into your development toolchain
+# Test requests in Postman using the Echo API
 
-## Postman API features
-## APIs for Enterprise or Professional plans
-## Deprecated endpoints
+## Using the Echo API
+## Echo for other protocols
+## Next steps
 
