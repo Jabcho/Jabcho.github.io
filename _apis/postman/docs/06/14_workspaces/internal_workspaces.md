@@ -1,5 +1,5 @@
 ---
-title: View team activity in Postman
+title: Internal workspaces
 project_id: postman   # ← 01.md, contents.md와 동일하게
 is_contents: false   # Contents 문서가 아니라면 기본 false (생략 가능)
 active_url: /api/postman/06/
@@ -11,6 +11,10 @@ nav_order: 6
 
 <br>
 
-## View workspace activity
-## Export team activity to other platforms
-## Next steps
+## Edit workspace details
+## Change workspace visibility
+## Change workspace themes
+## Share workspaces
+## Move elements to workspaces
+## Add workspaces to your Private API Network
+## Delete a workspace

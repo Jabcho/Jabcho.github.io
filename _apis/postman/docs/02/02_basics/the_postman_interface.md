@@ -57,7 +57,7 @@ Postman에서 이전 또는 다음 페이지로 이동합니다.
   position: absolute;
   left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
   width: 16px; height: 16px;
-  background: url("{{ '/assets/img/icons/icon-search-postman.jpg' | relative_url }}") no-repeat center / contain;
+  background: url("{{ '/assets/img/icons/icon-search-postman.png' | relative_url }}") no-repeat center / contain;
 }
 </style>
 
@@ -85,7 +85,7 @@ Postman에서 이전 또는 다음 페이지로 이동합니다.
   position: absolute;
   left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
   width: 16px; height: 16px;
-  background: url("{{ '/assets/img/icons/icon-settings.jpg' | relative_url }}") no-repeat center / contain;
+  background: url("{{ '/assets/img/icons/icon-settings.png' | relative_url }}") no-repeat center / contain;
 }
 </style>
 
@@ -106,7 +106,7 @@ Postman에서 이전 또는 다음 페이지로 이동합니다.
   position: absolute;
   left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
   width: 16px; height: 16px;
-  background: url("{{ '/assets/img/icons/icon-notifications.jpg' | relative_url }}") no-repeat center / contain;
+  background: url("{{ '/assets/img/icons/icon-notifications.png' | relative_url }}") no-repeat center / contain;
 }
 </style>
 
@@ -192,23 +192,259 @@ Postman 요소를 새로 만들려면 워크스페이스 이름 옆의 **New** �
   position: absolute;
   left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
   width: 16px; height: 16px;
-  background: url("{{ '/assets/img/icons/icon-collapse-sidebar.jpg' | relative_url }}") no-repeat center / contain;
+  background: url("{{ '/assets/img/icons/icon-collapse-sidebar.png' | relative_url }}") no-repeat center / contain;
 }
 </style>
 
 사이드바를 숨기려면 [하단(footer)]의 Collapse sidebar 아이콘(<span class="collapse-sidebar-icon"></span>) 을 클릭하거나, 사이드바의 빈 공간을 우클릭한 뒤 Collapse sidebar를 클릭하세요. 또한 사이드바를 우클릭해서 라벨을 표시하거나 숨길 수 있으며, 사이드바를 접거나 구성을 변경할 수도 있습니다.
 
 ### Add elements to the sidebar
+기본적으로 사이드바에는 Collections, Environments, History만 표시됩니다. 필요에 따라 Flows, APIs, Mock servers, Monitors, Specs 등의 다른 요소를 추가할 수 있습니다. 요소를 사이드바에 추가하는 방법은 다음과 같습니다:
+
+<style>
+/* 문단(또는 블록인용) 맨 앞에 아이콘을 고정 배치 */
+.configure-sidebar-icon{
+  position: relative;
+  padding-left: 1rem;            /* 아이콘 공간 확보 */
+  margin: 0 0 0 0;
+  line-height: 1.65;
+}
+
+/* 아이콘 자체 */
+.configure-sidebar-icon::before{
+  content: "";
+  position: absolute;
+  left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
+  width: 16px; height: 16px;
+  background: url("{{ '/assets/img/icons/icon-configure-sidebar.png' | relative_url }}") no-repeat center / contain;
+}
+</style>
+
+1. 워크스페이스의 사이드바에서 <span class="configure-sidebar-icon"></span> **Configure workspace sidebar**를 클릭합니다.
+
+2. **Workspace settings** 창에서 사이드바에 추가하려는 요소 옆의 토글(toggle)을 켭니다.
+
+![add_elements_sidebar]({{ '/assets/img/02/02_basics/add_elements_sidebar.png' | relative_url }})
+
+관리자 권한이 있는 경우, 워크스페이스 내 모든 멤버에게 공통으로 보이는 사이드바 요소를 선택할 수 있습니다.
+
+만든 요소들을 한꺼번에 보려면 Postman 헤더에서 프로필 아바타(avatar)를 클릭한 후 **View Profile**을 클릭하세요.
+
 ### History
+지금까지 만든 요청들을 확인하려면, 사이드바에서 **History**를 클릭하세요. Postman에 로그인한 상태라면, 히스토리가 기기에 관계없이 자동으로 [동기화]({% link _apis/postman/docs/02/02_basics/syncing.md %})됩니다.
+
+새 탭에서 요청을 다시 열려면 해당 항목을 클릭하세요. 여러 요청을 동시에 선택하려면 ⌘(Mac) 또는 Ctrl(Windows) 키를 누른 상태에서 항목들을 선택하세요.
+
+히스토리에는 [컬렉션 실행(Collection run)]({% link _apis/postman/docs/05/02_run/collection_runner.md %})도 포함됩니다. 이 경우 각 요청별 기록이 아닌, 실행 결과의 요약 형태로 저장됩니다.
+
+<style>
+/* 문단(또는 블록인용) 맨 앞에 아이콘을 고정 배치 */
+.delete-icon{
+  position: relative;
+  padding-left: 1rem;            /* 아이콘 공간 확보 */
+  margin: 0 0 0 0;
+  line-height: 1.65;
+}
+
+/* 아이콘 자체 */
+.delete-icon::before{
+  content: "";
+  position: absolute;
+  left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
+  width: 16px; height: 16px;
+  background: url("{{ '/assets/img/icons/icon-delete.png' | relative_url }}") no-repeat center / contain;
+}
+</style>
+
+<style>
+/* 문단(또는 블록인용) 맨 앞에 아이콘을 고정 배치 */
+.view-more-icon{
+  position: relative;
+  padding-left: 1rem;            /* 아이콘 공간 확보 */
+  margin: 0 0 0 0;
+  line-height: 1.65;
+}
+
+/* 아이콘 자체 */
+.view-more-icon::before{
+  content: "";
+  position: absolute;
+  left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
+  width: 16px; height: 16px;
+  background: url("{{ '/assets/img/icons/icon-view-more.png' | relative_url }}") no-repeat center / contain;
+}
+</style>
+
+- ＋ **컬렉션에 요청 추가하기**를 클릭하면 요청을 컬렉션에 저장할 수 있습니다.
+
+- <span class="delete-icon"></span> **요청 삭제하기**를 클릭하면 히스토리에 기록된 요청 내역을 삭제할 수 있습니다.
+
+- <span class="view-more-icon"></span> **더 많은 활동 보기**를 클릭하면 모니터(Monitor), 문서(Document), 모의 서버(Mock server) 생성 등
+추가 작업을 수행할 수 있습니다.
+
+<div style="
+  border:1px solid #EDEDED;
+  background: #F9F9F9;
+  border-radius:14px;
+  padding:18px 22px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  box-shadow:0 2px 0 rgba(33,150,243,.08);
+">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div style="line-height:1.35;">
+        공유 워크스페이스에서 요청을 보낸 경우, 해당 요청의 히스토리는 본인에게만 보이며 워크스페이스의 다른 멤버에게는 표시되지 않습니다.
+    </div>
+  </div>
+</div>
+
 ### Clearing your history
+히스토리의 모든 요청을 삭제하려면,
+History 검색창 옆의 <span class="view-more-icon"></span> **더 많은 활동 보기**를 클릭하고 Clear all 을 클릭하세요.
+
 ### Saving responses in history
+응답(Response)을 히스토리에 함께 저장하려면, 사이드바에서 History 를 클릭한 뒤 <span class="view-more-icon"></span> **더 많은 활동 보기**를 클릭하고 ***Save Responses** 옵션을 켜세요.
+
+**Save Responses** 설정을 켜야만 히스토리에서 [HTTP 요청과 그 응답을 다른 멤버와 공유]({% link _apis/postman/docs/06/07_share/share_your_work.md %}#share-a-request-with-its-response)할 수 있습니다. 요청을 보낼 때 이 옵션이 꺼져 있으면, 해당 요청의 응답을 히스토리에서 확인하거나 공유할 수 없습니다.
+
+<div style="
+  border:1px solid #EDEDED;
+  background: #F9F9F9;
+  border-radius:14px;
+  padding:18px 22px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  box-shadow:0 2px 0 rgba(33,150,243,.08);
+">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div style="line-height:1.35;">
+        단, [Collection Runner]({% link _apis/postman/docs/05/02_run/collection_runner.md %})에서 실행한 요청은 **Save Responses** 옵션을 사용할 수 없습니다.
+    </div>
+  </div>
+</div>
 
 ## Workbench
+컬렉션, API, 또는 다른 유형의 작업을 진행할 때 Postman 워크벤치는 대부분의 작업이 이루어지는 공간입니다.
+[탭(Tabs)](#tabs)을 통해 작업을 체계적으로 정리할 수 있고, [오른쪽 사이드바](#right-sidebar)에서는 각 요소에 맞는 문서화 등의 도구에 접근할 수 있습니다. [환경 선택기(Environment selector)와 변수 창(Variables pane)](#environment-selector-and-variables-pane)을 통해서는 변수를 관리할 수 있습니다.
 
 ### Tabs
+탭은 여러 요청을 효율적으로 정리하고 작업할 수 있도록 도와줍니다.
+
+<div style="
+  border:1px solid #EDEDED;
+  background: #F9F9F9;
+  border-radius:14px;
+  padding:18px 22px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  box-shadow:0 2px 0 rgba(33,150,243,.08);
+">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div style="line-height:1.35;">
+        이 섹션은 Postman 데스크톱 앱에서 탭이 작동하는 방식을 설명합니다. 기본적으로 Postman 웹 앱에서도 탭이 동작하는 방식은 동일합니다. 그러나 필요한 경우 브라우저 탭을 대신 사용할 수도 있으며, 이 경우 각 Postman 요소를 다른탭에서 열 수 있습니다. 자세한 내용은 [Postman 웹 앱의 Browser tabs](#browser-tabs-in-the-postman-web-app)를 참고하세요.
+    </div>
+  </div>
+</div>
+
 ### Opening a new tab
+새 탭을 열려면 워크벤치에서 + 버튼을 클릭하세요.
+
+<div style="
+  border:1px solid #EDEDED;
+  background: #F9F9F9;
+  border-radius:14px;
+  padding:18px 22px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  box-shadow:0 2px 0 rgba(33,150,243,.08);
+">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div style="line-height:1.35;">
+        또는 ⌘+T(Mac) 또는 Ctrl+T(Windows) 단축키를 눌러 새 탭을 열 수 있습니다.
+    </div>
+  </div>
+</div>
+
+![new_tab_open]({{ '/assets/img/02/02_basics/new_tab_open.png' | relative_url }})
+
+요청을 열었지만 수정하거나 전송하지 않은 상태에서
+다른 요청을 열면 두 번째 탭이 첫 번째 탭을 대체합니다. 탭이 미리보기 모드(Preview mode) 로 열리면 탭 제목이 이탤릭체로 표시됩니다.
+
+Postman에서 요청 또는 기타 사이드바 항목을 새 탭에서 열지에 대한 여부는 설정에서 변경할 수 있습니다. 헤더의 설정 아이콘
+<span class="settinngs-icon"></span> 을 클릭한 뒤 **Settings**를 선택하세요. **User Interface** 항목 아래에서 **Always open sidebar item in new tab** 토글을 켜거나 꺼서 설정할 수 있습니다.
+
+<style>
+/* 문단(또는 블록인용) 맨 앞에 아이콘을 고정 배치 */
+.save-icon{
+  position: relative;
+  padding-left: 1rem;            /* 아이콘 공간 확보 */
+  margin: 0 0 0 0;
+  line-height: 1.65;
+}
+
+/* 아이콘 자체 */
+.save-icon::before{
+  content: "";
+  position: absolute;
+  left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
+  width: 16px; height: 16px;
+  background: url("{{ '/assets/img/icons/icon-save.png' | relative_url }}") no-repeat center / contain;
+}
+</style>
+
 ### Saving or discarding changes
+탭에 저장되지 않은 변경 사항이 있을 경우, 탭 이름 옆에 점이 표시됩니다. 변경 내용을 저장하려면 Save 아이콘 <span class="save-icon"></span> 을 클릭하세요.
+
+변경 사항을 저장하지 않고 탭을 닫으려면 닫기 아이콘 ✕ 을 클릭한 뒤 **Don’t save**를 선택하세요.
+
 ### Renaming and linking elements
+요소의 이름을 바꾸려면 이름을 클릭하고 새 이름을 입력하세요.
+
+![rename_and_link]({{ '/assets/img/02/02_basics/rename_and_link.png' | relative_url }})
+
+<div style="
+  border:1px solid #EDEDED;
+  background: #F9F9F9;
+  border-radius:14px;
+  padding:18px 22px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  box-shadow:0 2px 0 rgba(33,150,243,.08);
+">
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div style="line-height:1.35;">
+        또는 사이드바에서 컬렉션이나 그 하위 요소(폴더, 요청, 예제 등)를 클릭하고 **Enter** 또는 **Return** 키를 눌러 이름을 변경할 수 있습니다.
+    </div>
+  </div>
+</div>
+
+<style>
+/* 문단(또는 블록인용) 맨 앞에 아이콘을 고정 배치 */
+.link-icon{
+  position: relative;
+  padding-left: 1rem;            /* 아이콘 공간 확보 */
+  margin: 0 0 0 0;
+  line-height: 1.65;
+}
+
+/* 아이콘 자체 */
+.link-icon::before{
+  content: "";
+  position: absolute;
+  left: 0; top: .2rem;             /* 필요 시 .1~.3rem로 미세 조정 */
+  width: 16px; height: 16px;
+  background: url("{{ '/assets/img/icons/icon-link.png' | relative_url }}") no-repeat center / contain;
+}
+</style>
+
+링크를 복사하려면, 워크벤치에서 요소 이름 위에 마우스를 올리면 링크 아이콘 
+<span class="link-icon"></span> 이 표시됩니다. 링크 아이콘을 클릭하면
+해당 요소의 URL을 클립보드에 복사할 수 있습니다.
+
+![rename_and_link_2]({{ '/assets/img/02/02_basics/rename_and_link_2.png' | relative_url }})
+
+
+해당 요소가 다른 사용자가 접근할 수 없는 워크스페이스에 있을 경우, 링크 아이콘을 클릭하면 팝업 창이 열립니다. 링크를 공유하기 전에 이 팝업 창을 통해 워크스페이스에 사용자를 초대하세요. **Invite People**을 클릭하면 사람들을 초대할 수 있습니다.
+워크스페이스에 사용자를 초대해 협업하기 위한 자세한 내용은
+[Share workspaces]({% link _apis/postman/docs/1061/14_workspaces/internal_workspaces.md %}#share_workspaces)를 참고하세요.
+
+![rename_and_link_3]({{ '/assets/img/02/02_basics/rename_and_link_3.png' | relative_url }})
+
 ### Viewing conflicts
 ### Managing tabs
 ### Tab search
