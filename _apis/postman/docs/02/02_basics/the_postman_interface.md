@@ -441,7 +441,7 @@ Postman에서 요청 또는 기타 사이드바 항목을 새 탭에서 열지�
 
 해당 요소가 다른 사용자가 접근할 수 없는 워크스페이스에 있을 경우, 링크 아이콘을 클릭하면 팝업 창이 열립니다. 링크를 공유하기 전에 이 팝업 창을 통해 워크스페이스에 사용자를 초대하세요. **Invite People**을 클릭하면 사람들을 초대할 수 있습니다.
 워크스페이스에 사용자를 초대해 협업하기 위한 자세한 내용은
-[Share workspaces]({% link _apis/postman/docs/1061/14_workspaces/internal_workspaces.md %}#share_workspaces)를 참고하세요.
+[Share workspaces]({% link _apis/postman/docs/06/14_workspaces/internal_workspaces.md %}#share_workspaces)를 참고하세요.
 
 ![rename_and_link_3]({{ '/assets/img/02/02_basics/rename_and_link_3.png' | relative_url }})
 
